@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta content="text/html; charset=UTF-8" http-equiv="Content-Type"/>
+	<meta content="width=device-width, initial-scale=1, maximum-scale=1.0" name="viewport"/>
+	<title>Advent Of Code 2020 - Day 1</title>
+
+	<!-- CSS  -->
+	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+	<link href="css/materialize.css" media="screen,projection" rel="stylesheet" type="text/css"/>
+	<link href="css/style.css" media="screen,projection" rel="stylesheet" type="text/css"/>
+</head>
+<body>
+<nav class="light-blue lighten-1" role="navigation">
+	<div class="nav-wrapper container"><a class="brand-logo" href="#" id="logo-container"></a>
+		<ul class="right hide-on-med-and-down"></ul>
+
+		<ul class="sidenav" id="nav-mobile"></ul>
+		<a class="sidenav-trigger" data-target="nav-mobile" href="#"><i class="material-icons">menu</i></a>
+	</div>
+</nav>
+
+<div class="section flex">
+	<div class="row">
+		<div class="col input-field s12">
+			<input type="file" name="inputfile"
+					id="inputfile">
+		</div>
+	</div>
+	<div class="row">
+		<div class="col s12">
+			<div id="toPrint"></div>
+		</div>
+	</div>
+</div>
+
+
+
+<!--  Scripts-->
+<script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+<script src="js/materialize.js"></script>
+<script src="js/init.js"></script>
+<script src="js/custom.js"></script>
+<script>
+
+	let input
+
+
+	function checkValidPassword(min, max, letterToSearch, password) {
+
+		let count=0;
+		for (const s of password) {
+			if (s==letterToSearch){
+				count++
+			}
+		}
+
+		return (count >= min && count <= max)
+	}
+
+	function findPassword() {
+		let count = 0
+		let inputs = input.split("\n");
+		for (const input1 of inputs) {
+			console.log(input1)
+			if (input1==""){
+				break
+			}
+			let regexedInput = input1.match(/([0-9]+)-([0-9]+) ([a-z]{1}): ([a-z]+)/);
+			let min = regexedInput[1];
+			let max = regexedInput[2];
+			let letterToSearch = regexedInput[3];
+			let password = regexedInput[4];
+			if (checkValidPassword(min,max, letterToSearch, password)){
+				count ++
+			}
+		}
+
+		console.log(count, inputs.length)
+		$("#toPrint").html("Parte 1: " + count)
+	}
+
+	function checkValidPasswordAgain(x, y, letterToSearch, password) {
+
+		if (password[x] == letterToSearch && password [y] == letterToSearch)
+			return false
+		if (password[x]!=letterToSearch && password [y] != letterToSearch)
+			return false
+
+		return true;
+	}
+
+	function findPasswordAgain(){
+		let count = 0
+		let inputs = input.split("\n");
+		for (const input1 of inputs) {
+			console.log(input1)
+			if (input1==""){
+				break
+			}
+			let regexedInput = input1.match(/([0-9]+)-([0-9]+) ([a-z]{1}): ([a-z]+)/);
+			let x = regexedInput[1];
+			let y = regexedInput[2];
+			let letterToSearch = regexedInput[3];
+			let password = regexedInput[4];
+			if (checkValidPasswordAgain(x-1,y-1, letterToSearch, password)){
+				count ++
+			}
+		}
+
+		console.log(count, inputs.length)
+		$("#toPrint").html( $("#toPrint").html() + "\nParte 2: " + count)
+	}
+
+	function performAdvent(){
+		findPassword()
+		findPasswordAgain()
+	}
+
+	$(document).ready(function () {
+		getInput(performAdvent);
+	});
+
+
+
+
+</script>
+
+</body>
+</html>
