@@ -1,0 +1,28 @@
+/* Custom Stylesheet */
+/**
+ * Use this file to override Materialize files so you can update
+ * the core Materialize files in the future
+ *
+ * Made By MaterializeCSS.com
+ */
+
+.icon-block {
+  padding: 0 15px;
+}
+.icon-block .material-icons {
+	font-size: inherit;
+}
+
+.flex {
+    display: flex;
+    flex-wrap: wrap;
+    max-height: 100vh;  /*or use calc(100vh - header_height)*/
+    overflow: hidden
+}
+li {
+    list-style-type: disc !important;
+}
+
+.profile_picture{
+    max-height: 128px;
+}
