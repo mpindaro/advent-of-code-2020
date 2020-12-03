@@ -9,37 +9,69 @@
 	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 	<link href="css/materialize.css" media="screen,projection" rel="stylesheet" type="text/css"/>
 	<link href="css/style.css" media="screen,projection" rel="stylesheet" type="text/css"/>
+	<link rel="icon" type="image/png" sizes="96x96" href="img/favicon.ico">
+
 </head>
 <body>
+<ul class="dropdown-content" id="dropdown1">
+	<li><a href="day1.html">Day 1 </a></li>
+	<li><a href="day2.html">Day 2 </a></li>
+	<li><a href="day3.html">Day 3 </a></li>
+</ul>
 <nav class="light-blue lighten-1" role="navigation">
-	<div class="nav-wrapper container"><a class="brand-logo" href="#" id="logo-container"></a>
-		<ul class="right hide-on-med-and-down"></ul>
+	<div class="nav-wrapper">
+		<a href="#" class="brand-logo center">Day 1</a>
 
-		<ul class="sidenav" id="nav-mobile"></ul>
+		<ul class="right hide-on-med-and-down">
+			<!-- Dropdown Trigger -->
+			<a class="dropdown-trigger" data-target="dropdown1" href="#!">Dropdown<i class="material-icons right">arrow_drop_down</i></a>
+		</ul>
+
+		<ul class="sidenav" id="nav-mobile">
+			<li><a href="day1.html">Day 1 </a></li>
+			<li><a href="day2.html">Day 2 </a></li>
+			<li><a href="day3.html">Day 3 </a></li>
+		</ul>
 		<a class="sidenav-trigger" data-target="nav-mobile" href="#"><i class="material-icons">menu</i></a>
 	</div>
 </nav>
 
-<div class="section flex">
-	<div class="row">
-		<div class="col input-field s12">
-			<input type="file" name="inputfile"
-					id="inputfile">
+<div class="container">
+	<br>
+	<br>
+	<br>
+	<br>
+	<div class="section">
+		<div class="row center">
+			<div class="col input-field file-field s12">
+				<div class="btn">
+					<span>Inserire l'input</span> <input id="inputfile" name="inputfile" type="file">
+				</div>
+
+				<div class="file-path-wrapper">
+					<input class="file-path validate" type="text">
+				</div>
+			</div>
 		</div>
-	</div>
-	<div class="row">
-		<div class="col s12">
-			<div id="toPrint"></div>
+		<div class="row center">
+			<div class="col s6">
+				<h5>Parte 1: </h5>
+				<h6 id="Parte1"></h6>
+			</div>
+			<div class="col s6">
+				<h5>Parte 2: </h5>
+				<h6 id="Parte2"></h6>
+			</div>
 		</div>
 	</div>
 </div>
-
-
 
 <!--  Scripts-->
 <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
 <script src="js/materialize.js"></script>
 <script src="js/init.js"></script>
+<script src="js/custom.js"></script>
+
 <script>
 
 	let input
@@ -53,7 +85,7 @@
 			for (let j = 0; j < numbers.length; j++) {
 				let m = numbers[j]
 				if (n+m == 2020) {
-					$("#toPrint").html("Part 1: " + n * m)
+					$("#Parte1").html(n * m)
 					return
 				}
 			}
@@ -74,7 +106,7 @@
 				for (let k = 0; k < numbers.length; k++) {
 					let l = numbers[k]
 					if (n+m+l == 2020) {
-						$("#toPrint").html($("#toPrint").html() + "\n Part 2: " + (n * m * l))
+						$("#Parte2").html((n * m * l))
 						return
 					}
 				}
@@ -83,23 +115,14 @@
 		}
 	}
 
-	function getInput(){
-		document.getElementById('inputfile')
-			.addEventListener('change', function() {
-
-				var fr=new FileReader();
-				fr.onload=function(){
-					input=fr.result;
-					findTwoNumbers();
-					findThreeNumbers();
-				}
-
-				fr.readAsText(this.files[0]);
-			})
+	function findNumers(){
+		findTwoNumbers();
+		findThreeNumbers();
 	}
 
 	$(document).ready(function () {
-		 getInput();
+		$(".dropdown-trigger").dropdown();
+		getInput(findNumers);
 	});
 
 
