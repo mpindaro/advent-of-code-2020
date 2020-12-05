@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta content="text/html; charset=UTF-8" http-equiv="Content-Type"/>
+	<meta content="width=device-width, initial-scale=1, maximum-scale=1.0" name="viewport"/>
+	<title>Advent Of Code 2020 - Day 5</title>
+
+	<!-- CSS  -->
+	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+	<link href="css/materialize.css" media="screen,projection" rel="stylesheet" type="text/css"/>
+	<link href="css/style.css" media="screen,projection" rel="stylesheet" type="text/css"/>
+	<link href="img/favicon.ico" rel="icon" sizes="96x96" type="image/png">
+
+</head>
+<body>
+<ul class="dropdown-content" id="dropdown1">
+	<li><a href="day1.html">Day 1 </a></li>
+	<li><a href="day2.html">Day 2 </a></li>
+	<li><a href="day3.html">Day 3 </a></li>
+	<li><a href="day4.html">Day 4 </a></li>
+</ul>
+<nav class="light-blue lighten-1" role="navigation">
+	<div class="nav-wrapper">
+		<a class="brand-logo center" href="#">Day 5</a>
+		<ul class="right hide-on-med-and-down">
+			<!-- Dropdown Trigger -->
+			<a class="dropdown-trigger" data-target="dropdown1" href="#!">Altri giorni<i class="material-icons right">arrow_drop_down</i></a>
+		</ul>
+
+		<ul class="sidenav" id="nav-mobile">
+			<li><a href="day1.html">Day 1 </a></li>
+			<li><a href="day2.html">Day 2 </a></li>
+			<li><a href="day3.html">Day 3 </a></li>
+			<li><a href="day4.html">Day 4 </a></li>
+		</ul>
+		<a class="sidenav-trigger" data-target="nav-mobile" href="#"><i class="material-icons">menu</i></a>
+	</div>
+</nav>
+
+
+<div class="container">
+	<br> <br> <br> <br>
+	<div class="section">
+		<div class="row center">
+			<div class="col input-field file-field s12">
+				<div class="btn">
+					<span>Inserire l'input</span> <input id="inputfile" name="inputfile" type="file">
+				</div>
+
+				<div class="file-path-wrapper">
+					<input class="file-path validate" type="text">
+				</div>
+			</div>
+		</div>
+		<div class="row center">
+			<div class="col s6">
+				<h5>Parte 1: </h5>
+				<h6 id="Parte1"></h6>
+			</div>
+			<div class="col s6">
+				<h5>Parte 2: </h5>
+				<h6 id="Parte2"></h6>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+<!--  Scripts-->
+<script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+<script src="js/materialize.js"></script>
+<script src="js/init.js"></script>
+<script src="js/custom.js"></script>
+<script>
+
+	let input
+
+	function getBinary(v) {
+		if (v==""){
+			return
+		}
+		let binaryString;
+		binaryString = v.replace(/F|L/g, 0)
+		binaryString = binaryString.replace(/B|R/g, 1)
+		console.log(binaryString)
+		return binaryString;
+	}
+
+	function findMySeat(seatIds) {
+		for (var x = 0; x < Math.max(...seatIds); x++) {
+			if ( seatIds.includes(x - 1) &&  !seatIds.includes(x) && seatIds.includes(x + 1)) {
+				$("#Parte2").html(x);
+			}
+		}
+
+	}
+
+	function highestSeat(){
+		let inputs = input.split("\n");
+
+		inputs=inputs.map( v => getBinary(v))
+		inputs = inputs.map(v => parseInt(v,2))
+		console.log(inputs)
+		inputs.pop()
+		$("#Parte1").html(Math.max(...inputs))
+
+		findMySeat(inputs)
+
+	}
+
+
+	function performAdvent() {
+		highestSeat()
+	}
+
+	$(document).ready(function () {
+		$(".dropdown-trigger").dropdown();
+		getInput(performAdvent);
+	});
+
+
+</script>
+
+</body>
+</html>
