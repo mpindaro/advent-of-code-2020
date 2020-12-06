@@ -3,13 +3,13 @@
 <head>
 	<meta content="text/html; charset=UTF-8" http-equiv="Content-Type"/>
 	<meta content="width=device-width, initial-scale=1, maximum-scale=1.0" name="viewport"/>
-	<title>Advent Of Code 2020 - Day 2</title>
+	<title>Advent Of Code 2020 - Day 6</title>
 
 	<!-- CSS  -->
 	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 	<link href="css/materialize.css" media="screen,projection" rel="stylesheet" type="text/css"/>
 	<link href="css/style.css" media="screen,projection" rel="stylesheet" type="text/css"/>
-	<link rel="icon" type="image/png" sizes="96x96" href="img/favicon.ico">
+	<link href="img/favicon.ico" rel="icon" sizes="96x96" type="image/png">
 
 </head>
 <body>
@@ -18,7 +18,7 @@
 </ul>
 <nav class="light-blue lighten-1" role="navigation">
 	<div class="nav-wrapper">
-		<a href="#" class="brand-logo center">Day 2</a>
+		<a class="brand-logo center" href="#">Day 6</a>
 		<ul class="right hide-on-med-and-down">
 			<!-- Dropdown Trigger -->
 			<a class="dropdown-trigger" data-target="dropdown1" href="#!">Altri giorni<i class="material-icons right">arrow_drop_down</i></a>
@@ -32,12 +32,8 @@
 </nav>
 
 
-
 <div class="container">
-	<br>
-	<br>
-	<br>
-	<br>
+	<br> <br> <br> <br>
 	<div class="section">
 		<div class="row center">
 			<div class="col input-field file-field s12">
@@ -72,86 +68,76 @@
 <script>
 
 	let input
+	let processedInput
 
+	function countNumberOfYes() {
 
-	function checkValidPassword(min, max, letterToSearch, password) {
+		let count = 0;
 
-		let count=0;
-		for (const s of password) {
-			if (s==letterToSearch){
-				count++
-			}
+		for (const group of processedInput) {
+			let mySet = new Set()
+			let allAnswersOfAGroup;
+
+			allAnswersOfAGroup = group.replace(/[\r\n\x0B\x0C\u0085\u2028\u2029]+/g, "")
+			allAnswersOfAGroup = allAnswersOfAGroup.split("")
+			allAnswersOfAGroup.forEach(v => mySet.add(v))
+
+			count += mySet.size;
 		}
 
-		return (count >= min && count <= max)
-	}
 
-	function findPassword() {
-		let count = 0
-		let inputs = input.split("\n");
-		for (const input1 of inputs) {
-			console.log(input1)
-			if (input1==""){
-				break
-			}
-			let regexedInput = input1.match(/([0-9]+)-([0-9]+) ([a-z]{1}): ([a-z]+)/);
-			let min = regexedInput[1];
-			let max = regexedInput[2];
-			let letterToSearch = regexedInput[3];
-			let password = regexedInput[4];
-			if (checkValidPassword(min,max, letterToSearch, password)){
-				count ++
-			}
-		}
-
-		console.log(count, inputs.length)
 		$("#Parte1").html(count)
 	}
 
-	function checkValidPasswordAgain(x, y, letterToSearch, password) {
-
-		if (password[x] == letterToSearch && password [y] == letterToSearch)
-			return false
-		if (password[x]!=letterToSearch && password [y] != letterToSearch)
-			return false
-
-		return true;
-	}
-
-	function findPasswordAgain(){
+	function howManyAllYes(answers, n) {
 		let count = 0
-		let inputs = input.split("\n");
-		for (const input1 of inputs) {
-			console.log(input1)
-			if (input1==""){
-				break
-			}
-			let regexedInput = input1.match(/([0-9]+)-([0-9]+) ([a-z]{1}): ([a-z]+)/);
-			let x = regexedInput[1];
-			let y = regexedInput[2];
-			let letterToSearch = regexedInput[3];
-			let password = regexedInput[4];
-			if (checkValidPasswordAgain(x-1,y-1, letterToSearch, password)){
-				count ++
+		for (let key in answers) {
+			if (answers[key] == n) {
+				count++
 			}
 		}
-
-		console.log(count, inputs.length)
-		$("#Parte2").html( count)
+		return count
 	}
 
-	function performAdvent(){
-		findPassword()
-		findPasswordAgain()
+	function countNumberOfYesEqualsOnAGroup() {
+
+		let allYesAnswers = 0;
+		for (const group of processedInput) {
+			let answers = {}
+
+			let people = group.split(/[\r\n\x0B\x0C\u0085\u2028\u2029]+/g);
+
+			for (const person of people) {
+				let mySet = new Set()
+				let personArray = person.split("")
+
+				personArray.forEach(v => mySet.add(v))
+				mySet.forEach(v => answers[v] = (answers[v] || 0) + 1)
+			}
+
+			allYesAnswers += howManyAllYes(answers, people.length)
+
+		}
+
+		$("#Parte2").html(allYesAnswers)
+
+
 	}
+
+	function performAdvent() {
+		input += "\n\n"
+		processedInput = input.split("\n\n");
+
+		countNumberOfYes()
+		countNumberOfYesEqualsOnAGroup()
+	}
+
 
 	$(document).ready(function () {
-		setUpNav($("#dropdown1"), $("#nav-mobile"))
 		$(".dropdown-trigger").dropdown();
+		setUpNav($("#dropdown1"), $("#nav-mobile"))
 		getInput(performAdvent);
 	});
-
-
 
 
 </script>

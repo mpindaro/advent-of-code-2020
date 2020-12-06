@@ -14,10 +14,7 @@
 </head>
 <body>
 <ul class="dropdown-content" id="dropdown1">
-	<li><a href="day1.html">Day 1 </a></li>
-	<li><a href="day2.html">Day 2 </a></li>
-	<li><a href="day3.html">Day 3 </a></li>
-	<li><a href="day4.html">Day 4 </a></li>
+
 </ul>
 <nav class="light-blue lighten-1" role="navigation">
 	<div class="nav-wrapper">
@@ -28,10 +25,7 @@
 		</ul>
 
 		<ul class="sidenav" id="nav-mobile">
-			<li><a href="day1.html">Day 1 </a></li>
-			<li><a href="day2.html">Day 2 </a></li>
-			<li><a href="day3.html">Day 3 </a></li>
-			<li><a href="day4.html">Day 4 </a></li>
+
 		</ul>
 		<a class="sidenav-trigger" data-target="nav-mobile" href="#"><i class="material-icons">menu</i></a>
 	</div>
@@ -121,13 +115,15 @@
 
 			for (const field of singlefields) {
 				if (!/cid:([0-9])+/.test(field)){
+
+
 					if(/byr:(19([2-8])([0-9])|199([0-9])|200([0-2]))/.test(field)){
 						controller.push(true)
 					}else if (/iyr:(201([0-9])|2020)/.test(field)){
 						controller.push(true)
 					}else if(/eyr:(202([0-9])|2030)/.test(field)){
 						controller.push(true)
-					}else if (/hgt:(1[5-8][0-9]|19[0-3])+cm/.test(field)) {
+					}else if (/hgt:(1[5-8][0-9]|19[0-3])cm/.test(field)) {
 							controller.push(true)
 					}else if(/hgt:(59|6[0-9]|7[0-6])+in/.test(field)){
 						controller.push(true)
@@ -152,12 +148,14 @@
 
 	}
 
+
 	function performAdvent(){
 		countValidPassport();
 		countReallyValidPassport();
 	}
 
 	$(document).ready(function () {
+		setUpNav($("#dropdown1"), $("#nav-mobile"))
 		$(".dropdown-trigger").dropdown();
 		getInput(performAdvent);
 	});
