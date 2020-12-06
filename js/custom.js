@@ -23,3 +23,50 @@ function setUpNav(mobile, nonmobile){
 	nonmobile.html(nav)
 	mobile.html(nav)
 }
+
+function setUpLights(rope){
+	let bulbs="<li></li>\n" +
+		"\t<li></li>\n" +
+		"\t<li></li>\n" +
+		"\t<li></li>\n" +
+		"\t<li></li>\n" +
+		"\t<li></li>\n" +
+		"\t<li></li>\n" +
+		"\t<li></li>\n" +
+		"\t<li></li>\n" +
+		"\t<li></li>\n" +
+		"\t<li></li>\n" +
+		"\t<li></li>\n" +
+		"\t<li></li>\n" +
+		"\t<li></li>\n" +
+		"\t<li></li>\n" +
+		"\t<li></li>\n" +
+		"\t<li></li>\n" +
+		"\t<li></li>\n" +
+		"\t<li></li>\n" +
+		"\t<li></li>\n" +
+		"\t<li></li>\n" +
+		"\t<li></li>\n" +
+		"\t<li></li>\n" +
+		"\t<li></li>\n" +
+		"\t<li></li>\n" +
+		"\t<li></li>\n" +
+		"\t<li></li>\n" +
+		"\t<li></li>\n" +
+		"\t<li></li>\n" +
+		"\t<li></li>\n" +
+		"\t<li></li>\n" +
+		"\t<li></li>\n" +
+		"\t<li></li>\n" +
+		"\t<li></li>\n" +
+		"\t<li></li>\n" +
+		"\t<li></li>\n" +
+		"\t<li></li>\n" +
+		"\t<li></li>\n" +
+		"\t<li></li>\n" +
+		"\t<li></li>\n" +
+		"\t<li></li>\n" +
+		"\t<li></li>"
+
+	rope.html(bulbs);
+}

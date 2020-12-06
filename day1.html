@@ -15,7 +15,7 @@
 <body>
 <ul class="dropdown-content" id="dropdown1">
 </ul>
-<nav class="light-blue lighten-1" role="navigation">
+<nav class="green darken-4" role="navigation">
 	<div class="nav-wrapper">
 		<a href="#" class="brand-logo center">Day 1</a>
 
@@ -29,7 +29,9 @@
 		<a class="sidenav-trigger" data-target="nav-mobile" href="#"><i class="material-icons">menu</i></a>
 	</div>
 </nav>
+<ul class="lightrope" id="lightrope">
 
+</ul>
 <div class="container">
 	<br>
 	<br>
@@ -38,7 +40,7 @@
 	<div class="section">
 		<div class="row center">
 			<div class="col input-field file-field s12">
-				<div class="btn">
+				<div class="btn  light-green darken-3">
 					<span>Inserire l'input</span> <input id="inputfile" name="inputfile" type="file">
 				</div>
 
@@ -117,6 +119,7 @@
 	$(document).ready(function () {
 		setUpNav($("#dropdown1"), $("#nav-mobile"))
 		$(".dropdown-trigger").dropdown();
+		setUpLights($("#lightrope"))
 		getInput(findNumers);
 	});
 
