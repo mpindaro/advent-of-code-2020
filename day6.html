@@ -68,24 +68,11 @@
 <script>
 
 	let input
-	let processedInput
+	let groups
 
 	function countNumberOfYes() {
-
-		let count = 0;
-
-		for (const group of processedInput) {
-			let mySet = new Set()
-			let allAnswersOfAGroup;
-
-			allAnswersOfAGroup = group.replace(/[\r\n\x0B\x0C\u0085\u2028\u2029]+/g, "")
-			allAnswersOfAGroup = allAnswersOfAGroup.split("")
-			allAnswersOfAGroup.forEach(v => mySet.add(v))
-
-			count += mySet.size;
-		}
-
-
+		let allSizes = groups.map(v => new Set(v.replace(/[\r\n\x0B\x0C\u0085\u2028\u2029]+/g, "").split("")).size)
+		let count = allSizes.reduce((tot, v) => v + tot)
 		$("#Parte1").html(count)
 	}
 
@@ -102,9 +89,8 @@
 	function countNumberOfYesEqualsOnAGroup() {
 
 		let allYesAnswers = 0;
-		for (const group of processedInput) {
+		for (const group of groups) {
 			let answers = {}
-
 			let people = group.split(/[\r\n\x0B\x0C\u0085\u2028\u2029]+/g);
 
 			for (const person of people) {
@@ -114,19 +100,15 @@
 				personArray.forEach(v => mySet.add(v))
 				mySet.forEach(v => answers[v] = (answers[v] || 0) + 1)
 			}
-
 			allYesAnswers += howManyAllYes(answers, people.length)
-
 		}
-
 		$("#Parte2").html(allYesAnswers)
-
 
 	}
 
 	function performAdvent() {
 		input += "\n\n"
-		processedInput = input.split("\n\n");
+		groups = input.split("\n\n");
 
 		countNumberOfYes()
 		countNumberOfYesEqualsOnAGroup()
