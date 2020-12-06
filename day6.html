@@ -92,14 +92,7 @@
 		for (const group of groups) {
 			let answers = {}
 			let people = group.split(/[\r\n\x0B\x0C\u0085\u2028\u2029]+/g);
-
-			for (const person of people) {
-				let mySet = new Set()
-				let personArray = person.split("")
-
-				personArray.forEach(v => mySet.add(v))
-				mySet.forEach(v => answers[v] = (answers[v] || 0) + 1)
-			}
+			people.forEach(v => new Set(v.split("")).forEach(w => answers[w] = (answers[w] || 0) + 1) )
 			allYesAnswers += howManyAllYes(answers, people.length)
 		}
 		$("#Parte2").html(allYesAnswers)
