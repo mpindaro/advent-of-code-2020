@@ -11,3 +11,5 @@
 [Day 5](https://raw.githack.com/mpindaro/advent-of-code-2020/master/day5.html)
 
 [Day 6](https://raw.githack.com/mpindaro/advent-of-code-2020/master/day6.html)
+
+[Day 7](https://raw.githack.com/mpindaro/advent-of-code-2020/master/day7.html)
