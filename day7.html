@@ -39,24 +39,8 @@
 	<br> <br> <br> <br>
 	<div class="section">
 		<div class="row center">
-			<div class="col input-field file-field s12">
-				<div class="btn  light-green darken-3">
-					<span>Inserire l'input</span> <input id="inputfile" name="inputfile" type="file">
-				</div>
-
-				<div class="file-path-wrapper">
-					<input class="file-path validate" type="text">
-				</div>
-			</div>
-		</div>
-		<div class="row center">
 			<div class="col s6">
-				<h5>Parte 1: </h5>
-				<h6 id="Parte1"></h6>
-			</div>
-			<div class="col s6">
-				<h5>Parte 2: </h5>
-				<h6 id="Parte2"></h6>
+				<h5 class="center-align">Questo fatto con Python. Codice <a href="day7.py">qui</a> </h5>
 			</div>
 		</div>
 	</div>
@@ -70,68 +54,12 @@
 <script src="js/custom.js"></script>
 <script>
 
-	let input
-	let bags
-
-	function howManyAtLeastAShinyBag() {
-		bags = bags.map(v => v.replace(".", ""))
-		let count = 0;
-
-		for (const bag of bags) {
-			if (bag == "") {
-				break
-			}
-			let outerBag = bag.match(/[a-z]+ [a-z]+/).toString()
-			let innerBags = []
-			let s = bag.replace(/[a-z]+ [a-z]+ bags contain /, "").split(", ")
-			for (const ss of s) {
-				if (ss != "no other bags") {
-					let temp = {}
-					let color = ss.match(/[a-z]+ [a-z]+/).toString()
-
-					let qta = parseInt(ss.match(/[0-9]+/).toString())
-					temp.color = color
-					temp.qta = qta
-					innerBags.push(temp)
-				}
-			}
-
-			//light red, dark orange, bright white, muted yellow
-
-			console.log(outerBag, innerBags)
-			if (/light red|dark orange|bright white|muted yellow/.test(outerBag)) {
-				console.log("eccomi")
-				count++
-			}
-
-
-				for (const innerBag of innerBags) {
-					if (/light red|dark orange|bright white|muted yellow/.test(innerBag.color)) {
-						console.log("eccomi")
-						count++
-					}
-				}
-
-		}
-		return count
-
-
-	}
-
-	function performAdvent() {
-		input += "\n"
-		bags = input.split("\n");
-		$("#Parte1").html(howManyAtLeastAShinyBag());
-
-
-	}
 
 
 	$(document).ready(function () {
 		$(".dropdown-trigger").dropdown();
 		setUpLights($("#lightrope"))
 		setUpNav($("#dropdown1"), $("#nav-mobile"))
-		getInput(performAdvent);
 	});
 
 
