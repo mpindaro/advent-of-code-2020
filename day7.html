@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta content="text/html; charset=UTF-8" http-equiv="Content-Type"/>
+	<meta content="width=device-width, initial-scale=1, maximum-scale=1.0" name="viewport"/>
+	<title>Advent Of Code 2020 - Day 6</title>
+
+	<!-- CSS  -->
+	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+	<link href="css/materialize.css" media="screen,projection" rel="stylesheet" type="text/css"/>
+	<link href="css/style.css" media="screen,projection" rel="stylesheet" type="text/css"/>
+	<link href="img/favicon.ico" rel="icon" sizes="96x96" type="image/png">
+
+</head>
+<body>
+<ul class="dropdown-content" id="dropdown1">
+
+</ul>
+<nav class="green darken-4" role="navigation">
+	<div class="nav-wrapper">
+		<a class="brand-logo center" href="#">Day 7</a>
+		<ul class="right hide-on-med-and-down">
+			<!-- Dropdown Trigger -->
+			<a class="dropdown-trigger" data-target="dropdown1" href="#!">Altri giorni<i class="material-icons right">arrow_drop_down</i></a>
+		</ul>
+
+		<ul class="sidenav" id="nav-mobile">
+
+		</ul>
+		<a class="sidenav-trigger" data-target="nav-mobile" href="#"><i class="material-icons">menu</i></a>
+	</div>
+</nav>
+<ul class="lightrope" id="lightrope">
+
+</ul>
+
+
+<div class="container">
+	<br> <br> <br> <br>
+	<div class="section">
+		<div class="row center">
+			<div class="col input-field file-field s12">
+				<div class="btn  light-green darken-3">
+					<span>Inserire l'input</span> <input id="inputfile" name="inputfile" type="file">
+				</div>
+
+				<div class="file-path-wrapper">
+					<input class="file-path validate" type="text">
+				</div>
+			</div>
+		</div>
+		<div class="row center">
+			<div class="col s6">
+				<h5>Parte 1: </h5>
+				<h6 id="Parte1"></h6>
+			</div>
+			<div class="col s6">
+				<h5>Parte 2: </h5>
+				<h6 id="Parte2"></h6>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+<!--  Scripts-->
+<script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+<script src="js/materialize.js"></script>
+<script src="js/init.js"></script>
+<script src="js/custom.js"></script>
+<script>
+
+	let input
+	let bags
+
+	function howManyAtLeastAShinyBag() {
+		bags = bags.map(v => v.replace(".", ""))
+		let count = 0;
+
+		for (const bag of bags) {
+			if (bag == "") {
+				break
+			}
+			let outerBag = bag.match(/[a-z]+ [a-z]+/).toString()
+			let innerBags = []
+			let s = bag.replace(/[a-z]+ [a-z]+ bags contain /, "").split(", ")
+			for (const ss of s) {
+				if (ss != "no other bags") {
+					let temp = {}
+					let color = ss.match(/[a-z]+ [a-z]+/).toString()
+
+					let qta = parseInt(ss.match(/[0-9]+/).toString())
+					temp.color = color
+					temp.qta = qta
+					innerBags.push(temp)
+				}
+			}
+
+			//light red, dark orange, bright white, muted yellow
+
+			console.log(outerBag, innerBags)
+			if (/light red|dark orange|bright white|muted yellow/.test(outerBag)) {
+				console.log("eccomi")
+				count++
+			}
+
+
+				for (const innerBag of innerBags) {
+					if (/light red|dark orange|bright white|muted yellow/.test(innerBag.color)) {
+						console.log("eccomi")
+						count++
+					}
+				}
+
+		}
+		return count
+
+
+	}
+
+	function performAdvent() {
+		input += "\n"
+		bags = input.split("\n");
+		$("#Parte1").html(howManyAtLeastAShinyBag());
+
+
+	}
+
+
+	$(document).ready(function () {
+		$(".dropdown-trigger").dropdown();
+		setUpLights($("#lightrope"))
+		setUpNav($("#dropdown1"), $("#nav-mobile"))
+		getInput(performAdvent);
+	});
+
+
+</script>
+
+</body>
+</html>
